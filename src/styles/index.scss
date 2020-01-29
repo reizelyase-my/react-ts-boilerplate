@@ -1,0 +1,9 @@
+@import "./variables.scss";
+@import "./fonts.scss";
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
+    line-height: 1.2;
+    color: $app_black;
+}
