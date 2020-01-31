@@ -1,9 +1,14 @@
 import * as React from 'react'
-import * as ReactDOM from 'react-dom'
+import { render } from 'react-dom'
 import { Provider } from 'react-redux'
+import { store } from './store'
+import Root from './routes'
+import './styles'
 
-ReactDOM.render(
-    <div>Hello</div>,
+render(
+    <Provider store={store}>
+        <Root />
+    </Provider>,
     document.getElementById("root")
 );
 

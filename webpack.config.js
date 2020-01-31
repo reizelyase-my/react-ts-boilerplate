@@ -1,6 +1,9 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+
+const isDevelopment = process.env.NODE_ENV === 'development'
 
 module.exports = {
   mode: "development",
@@ -19,15 +22,15 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
+        test: /\.ts|\.tsx$/,
+        loader: ['babel-loader', 'ts-loader'],
         exclude: /node_modules/,
       },
       {
         test: /\.s[ac]ss$/i,
         use: [
           'style-loader',
-          'css-loader',
+          { loader: 'css-loader', options: { modules: true } },
           'sass-loader',
         ],
       },
@@ -53,27 +56,22 @@ module.exports = {
         use: [
           'file-loader',
         ],
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: [
-          'file-loader',
-        ],
       }
     ],
   },
   resolve: {
-    extensions: [ '.tsx', '.ts', '.js' ],
+    extensions: ['.tsx', '.ts', '.js', '.scss'],
   },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'React + TypeScript',
+      template: 'src/index.html'
+    }),
+    new MiniCssExtractPlugin({
+      filename: isDevelopment ? '[name].css' : '[name].[hash].css',
+      chunkFilename: isDevelopment ? '[id].css' : '[id].[hash].css'
     })
   ],
-  devtool: 'source-map',
-  externals: {
-    "react": "React",
-    "react-dom": "ReactDOM"
-  }
+  devtool: 'source-map'
 };
