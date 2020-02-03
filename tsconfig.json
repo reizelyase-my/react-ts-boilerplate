@@ -9,10 +9,12 @@
         "allowJs": true,
         "baseUrl": "./src",
         "paths": {
-            "@utils/*": ["util/*"],
+            "@utils/*": ["utils/*"],
             "@components/*": ["components/*"],
-            "@routes/*": ["routes/*"],
-            "@services/*": ["services/*"]
+            "@layouts/*": ["layouts/*"],
+            "@containers/*": ["containers/*"],
+            "@types/*": ["types/*"],
+            "@actions/*": ["actions/*"]
         },
         "allowSyntheticDefaultImports": true,
         "moduleResolution": "node"

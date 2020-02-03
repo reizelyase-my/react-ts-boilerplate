@@ -18,7 +18,7 @@ const menu: Menu[] = [
 }
 ]
 
-const getMenuList = () => menu.map((m: Menu) => <li>
+const getMenuList = () => menu.map((m: Menu, key: number) => <li key={key}>
     <NavLink exact to={m.url} activeClassName={styles.active}>{m.text}</NavLink>
 </li>)
 

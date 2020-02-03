@@ -1,28 +1,23 @@
-import actions from '../actions/todos'
-import { takeEvery, put, all, fork } from 'redux-saga/effects';
+import actions from '@actions/todos'
+import { takeEvery, takeLatest, put, all, call, fork } from 'redux-saga/effects';
 
 export function* getAllTodos() {
-    yield takeEvery(actions.GET_ALL_TODOS_REQUEST, function* () {
-        try {
-            let response = yield fetch('https://jsonplaceholder.typicode.com/todos');
-            yield put({
-                type: actions.GET_ALL_TODOS_REQUEST_SUCCESS,
-                todos: response.data
-            })
-         } catch (error) {
-            yield put({
-                type: actions.GET_ALL_TODOS_REQUEST_ERROR,
-            })
-        }
-    })
+    try {
+        const api = yield call (fetch, 'https://jsonplaceholder.typicode.com/todos')
+        console.log({api})
+        const todos = yield call (api.json())
+        yield put({
+            type: actions.GET_ALL_TODOS_REQUEST_SUCCESS,
+            todos
+        })
+     } catch (error) {
+        yield put({
+            type: actions.GET_ALL_TODOS_REQUEST_ERROR,
+            error: "404: API not found!"
+        })
+    }
 }
 
-export function* getAllTodosError() {
-    yield takeEvery(actions.GET_ALL_TODOS_REQUEST_ERROR,
-                       function* () { console.log("error") })
-}
-export default function* rootSaga() {
-    yield all([
-        fork(getAllTodos)
-    ])
+export default function* todosSaga() {
+    yield takeLatest(actions.GET_ALL_TODOS_REQUEST, getAllTodos)
 }

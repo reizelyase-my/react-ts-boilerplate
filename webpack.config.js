@@ -56,11 +56,23 @@ module.exports = {
         use: [
           'file-loader',
         ],
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
       }
     ],
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.scss'],
+    alias: {
+      "@utils": path.resolve(__dirname, 'src/utils/'),
+      "@types": path.resolve(__dirname, 'src/types/'),
+      "@layouts": path.resolve(__dirname, 'src/layouts/'),
+      "@components": path.resolve(__dirname, 'src/components/'),
+      "@containers": path.resolve(__dirname, 'src/containers/'),
+      "@actions": path.resolve(__dirname, 'src/actions/')
+    }
   },
   plugins: [
     new CleanWebpackPlugin(),
