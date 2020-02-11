@@ -1,47 +1,48 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
+import { Form } from 'react-bootstrap'
 import { setPageTitle } from '@actions/global'
-import { getAllTodos } from '@actions/todos'
+import { HeaderProps } from '../../types/global'
 import { Todo } from '../../types/todo'
-import { NotificationType } from '../../types/global'
-import { notify } from '@utils/global'
-import * as styles from './todos.scss'
+import List from '@components/List'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
-const Todos = ({ 
-    todos, 
-    fetched,
-    fetching, 
-    error,
-    dispatch
-}: { 
-    todos: Todo[], 
-    fetched: boolean, 
-    fetching: boolean, 
-    error: any, 
-    dispatch: any 
-}) => {
+const headers: HeaderProps[] = [
+    {
+        label: "",
+        fieldName: "completed"
+    }, {
+        label: "Title",
+        fieldName: "title"
+    }
+]
+
+const Todos = ({ dispatch }: any) => {
+    const getListContent = (items: any[]) => {
+        return <tbody>
+        { !items.length ?
+            <tr>
+                <td colSpan={headers.length}></td>
+            </tr> :
+            items.map((item: Todo, index: number) => <tr key={index}>
+                <td>
+                    <Form.Check type="checkbox" defaultChecked={item.completed} />
+                </td>
+                <td>{item.title}</td>
+            </tr>)
+        }
+        </tbody>
+    }
+
     React.useEffect(() => {
         dispatch(setPageTitle("Todos"))
     })
 
-    React.useEffect(() => {
-        if (!fetching && !fetched) {
-            dispatch(getAllTodos())
-        }
-
-        if (!fetching && !!fetched && error) {
-            notify(NotificationType.ERROR, error)
-        }
-    }, [fetched, fetching, error])
-
-    return <div>Todos</div>
+    return <List 
+        dataSource='todos'
+        headers={headers}
+        getListContent={getListContent}
+    />
 }
 
-const mapStateToProps = (state: any) => ({
-    todos: state.todo.todos,
-    fetched: state.todo.fetched,
-    fetching: state.todo.fetching,
-    error: state.todo.error
-})
-
-export default connect(mapStateToProps)(Todos)
+export default connect()(Todos)

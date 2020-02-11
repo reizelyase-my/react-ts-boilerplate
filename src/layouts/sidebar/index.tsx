@@ -23,9 +23,7 @@ const getMenuList = () => menu.map((m: Menu, key: number) => <li key={key}>
 </li>)
 
 const Sidebar = () => <div className={styles.sidebar}>
-    <div className={styles.logo}>
-        
-    </div>
+    <div className={styles.logo} />
     <div className={styles.sideNav}>
         <ul>{getMenuList()}</ul>
     </div>
