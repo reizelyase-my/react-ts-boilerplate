@@ -13,8 +13,9 @@
             "@components/*": ["components/*"],
             "@layouts/*": ["layouts/*"],
             "@containers/*": ["containers/*"],
-            "@types/*": ["types/*"],
-            "@actions/*": ["actions/*"]
+            "@typings/*": ["types/*"],
+            "@actions/*": ["actions/*"],
+            "@reducers/*": ["reducers/*"]
         },
         "allowSyntheticDefaultImports": true,
         "moduleResolution": "node"

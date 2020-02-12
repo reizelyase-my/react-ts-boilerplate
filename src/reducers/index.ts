@@ -1,7 +1,14 @@
+import { State as GlobalState } from '@typings/global'
+import { State as TodosState } from '@typings/todo'
 import global from './global'
-import todo from './todos'
+import todos from './todos'
+
+export interface State {
+    global: GlobalState
+    todos: TodosState
+}
 
 export default {
     global,
-    todo
+    todos
 }

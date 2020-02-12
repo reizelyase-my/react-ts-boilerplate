@@ -1,5 +1,5 @@
-import actions from '../actions/global'
-import { State } from '../types/global'
+import actions from '@actions/global'
+import { State } from '@typings/global'
 
 const initialState: State = {
   title: ''

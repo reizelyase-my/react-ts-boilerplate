@@ -4,7 +4,6 @@ import { takeEvery, takeLatest, put, all, call, fork } from 'redux-saga/effects'
 export function* getAllTodos() {
     try {
         const api = yield call (fetch, 'https://jsonplaceholder.typicode.com/todos')
-        console.log({api})
         const todos = yield call (api.json())
         yield put({
             type: actions.GET_ALL_TODOS_REQUEST_SUCCESS,

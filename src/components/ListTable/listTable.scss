@@ -1,3 +1,10 @@
-table {
-  width: 100%;
+.listWrapper {
+  table {
+    width: 100%;
+  }
+
+  ul {
+    align-items: center;
+    justify-content: center;
+  }
 }
