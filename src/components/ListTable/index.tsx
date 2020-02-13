@@ -28,23 +28,28 @@ const ListTable = ({
   const Pages = () => {
     let pages: any[] = []
     const exceedNumPagesLimit = numPages > MAX_NUM_PAGES
-    let firstPage = (currentPage - 4) > 1 ? currentPage - 4 : 1
+    let firstPage
     let offsetFromFirst
+
+    if (currentPage - 4 > 1) {
+      if (numPages - currentPage < 5) {
+        firstPage = (currentPage - 4) - (5 - (numPages - currentPage))
+      } else {
+        firstPage = currentPage - 4
+      }
+    } else {
+      firstPage = 1
+    }
     
     if ((currentPage + 5) < numPages) {
       if (currentPage - firstPage < 4) {
         offsetFromFirst = currentPage + 4 + Math.abs(4 - firstPage)
-        console.log({offsetFromFirst})
       } else {
         offsetFromFirst = currentPage + 4
       }
     } else {
       offsetFromFirst = numPages - 1
     }
-
-    // if (offsetFromFirst - currentPage < 4) {
-    //   firstPage += (offsetFromFirst - currentPage)
-    // } 
 
     for(let i: number = firstPage; i <= offsetFromFirst; i++) {
       pages.push(
@@ -75,13 +80,27 @@ const ListTable = ({
     }
   
     return <Pagination>
-      { currentPage !== 1 && <Pagination.First /> }
-      { currentPage - 1 > 0 && <Pagination.Prev /> }
+      { 
+        currentPage !== 1 && 
+        <Pagination.First 
+          onClick={() => setCurrentPage(1)}
+        /> 
+      }
+      { 
+        currentPage - 1 > 0 && 
+        <Pagination.Prev 
+          onClick={() => setCurrentPage(currentPage - 1)}
+        /> 
+      }
       { pages }
       { offsetFromFirst < numPages - 1 && 
         <React.Fragment>
-          <Pagination.Next />
-          <Pagination.Last />
+          <Pagination.Next 
+            onClick={() => setCurrentPage(currentPage + 1)}
+          />
+          <Pagination.Last 
+            onClick={() => setCurrentPage(numPages)}
+          />
         </React.Fragment>
       }
     </Pagination>
