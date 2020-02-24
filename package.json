@@ -6,7 +6,9 @@
   "scripts": {
     "build": "tsc && webpack --color=true",
     "start": "webpack-dev-server --color",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --colors --detectOpenHandles --no-cache",
+    "test:watch": "jest --watch --colors --detectOpenHandles",
+    "test:coverage": "jest --coverage --colors --detectOpenHandles"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +21,7 @@
     "@types/react-dom": "^16.9.5",
     "@types/react-redux": "^7.1.7",
     "@types/react-router-dom": "^5.1.3",
+    "babel-jest": "^25.1.0",
     "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.4.2",
@@ -26,6 +29,7 @@
     "enzyme-adapter-react-16": "^1.15.2",
     "file-loader": "^5.0.2",
     "html-webpack-plugin": "^3.2.0",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^25.1.0",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.13.1",
@@ -34,6 +38,7 @@
     "sass-loader": "^8.0.2",
     "source-map-loader": "^0.2.4",
     "style-loader": "^1.1.3",
+    "ts-jest": "^25.2.0",
     "ts-loader": "^6.2.1",
     "typescript": "^3.7.5",
     "webpack": "^4.41.5",
@@ -41,6 +46,7 @@
     "webpack-dev-server": "^3.10.1"
   },
   "dependencies": {
+    "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/node": "^13.5.1",
     "bootstrap": "^4.4.1",
     "react": "^16.12.0",

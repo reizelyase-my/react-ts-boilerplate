@@ -18,13 +18,15 @@
             "@reducers/*": ["reducers/*"]
         },
         "allowSyntheticDefaultImports": true,
-        "moduleResolution": "node"
+        "moduleResolution": "node",
+        "esModuleInterop": true
     },
     "include": [
         "./src/**/*",
         "./typings/*"
     ],
     "exclude": [
-        "node_modules"
+        "node_modules",
+        "src/setup.ts"
     ]
 }

@@ -1,11 +1,11 @@
 import * as React from 'react'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Form } from 'react-bootstrap'
 import { setPageTitle } from '@actions/global'
 import List from '@components/List'
 import { HeaderProps } from '@typings/global'
 import { Todo } from '@typings/todo'
-import { State } from '@reducers'
+import { State } from '@reducers/index'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 const headers: HeaderProps[] = [
@@ -18,7 +18,11 @@ const headers: HeaderProps[] = [
     }
 ]
 
-const Todos = ({ currentPage, numPages, dispatch }: any) => {
+const Todos = () => {
+    const dispatch = useDispatch()
+    const currentPage = useSelector((state: State) => state.todos.currentPage)
+    const numPages = useSelector((state: State) => state.todos.numPages)
+
     const getListContent = (items: any[]) => {
         return <tbody>
         { !items.length ?
@@ -48,9 +52,4 @@ const Todos = ({ currentPage, numPages, dispatch }: any) => {
     />
 }
 
-const mapStateToProps = (state: State) => ({
-    currentPage: state.todos.currentPage,
-    numPages: state.todos.numPages
-})
-
-export default connect(mapStateToProps)(Todos)
+export default Todos

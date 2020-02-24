@@ -1,3 +1,4 @@
+import { combineReducers } from 'redux'
 import { State as GlobalState } from '@typings/global'
 import { State as TodosState } from '@typings/todo'
 import global from './global'
@@ -8,7 +9,7 @@ export interface State {
     todos: TodosState
 }
 
-export default {
+export default combineReducers ({
     global,
     todos
-}
+})

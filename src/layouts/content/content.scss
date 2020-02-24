@@ -3,6 +3,7 @@
 .contentWrapper {
   width: calc(100vw - 350px);
   padding: 1rem 1.5rem;
+  color: $app_red;
 }
 
 .pageTitle {
@@ -13,7 +14,7 @@
   h1 { 
     display: inline-block;
     line-height: 2.5rem;
-    border-bottom: 1px solid $app_black;
+    border-bottom: 1px solid $app_red;
     padding: 0 30px 0 0;
     margin: 0;
     min-width: 80%;

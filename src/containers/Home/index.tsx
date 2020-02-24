@@ -1,13 +1,16 @@
 import * as React from 'react'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setPageTitle } from '@actions/global'
+import * as styles from './home.scss'
 
-const Home = ({ dispatch }: { dispatch: any }) => {
+const Home = () => {
+    const dispatch = useDispatch()
+    
     React.useEffect(() => {
         dispatch(setPageTitle("Home"))
     })
 
-    return <div>Lorem ipsum dolor sit amet</div>
+    return <div className={styles.homeTexts}>Lorem ipsum dolor sit amet</div>
 }
 
-export default connect()(Home)
+export default Home
