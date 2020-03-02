@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { HeaderProps, ListType } from '@typings/global'
 import { setNumPages, setCurrentPage } from '@actions/todos'
 import ListTable from '@components/ListTable'
@@ -12,7 +12,6 @@ interface Props {
   getListContent: (i: any[]) => any
   page?: number
   limit?: number
-  dispatch: any
   currentPage: number
   numPages: number
 }
@@ -21,16 +20,15 @@ interface HOCProps {
   dataSource: string
   page?: number
   limit?: number
-  dispatch: any
 }
 
-const useDataFetching = ({
+export const useDataFetching = ({
   dataSource,
   page = 1,
-  limit = 10,
-  dispatch
+  limit = 10
 }: HOCProps) => {
   const baseUrl = `https://jsonplaceholder.typicode.com/${dataSource}`
+  const dispatch = useDispatch()
   const [items, setItems] = React.useState<any[]>([])
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState<any>(null)
@@ -86,14 +84,13 @@ const List = ({
   getListContent,
   layout = ListType.TABLE,
   currentPage,
-  numPages,
-  dispatch
+  numPages
 }: Props) => {
   let listComponent
+  const dispatch = useDispatch()
   const { items, loading, error } = useDataFetching({
     dataSource, 
     page: currentPage,
-    dispatch
   })
 
   switch(layout) {
@@ -109,8 +106,8 @@ const List = ({
       />
       break;
   }
-
+  
   return listComponent
 }
 
-export default connect()(List)
+export default List
