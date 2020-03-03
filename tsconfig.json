@@ -19,7 +19,9 @@
         },
         "allowSyntheticDefaultImports": true,
         "moduleResolution": "node",
-        "esModuleInterop": true
+        "esModuleInterop": true,
+        "types": ["jest"],
+        "lib": ["dom", "ES2015", "ESNext"]
     },
     "include": [
         "./src/**/*",

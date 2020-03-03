@@ -16,19 +16,18 @@ interface Props {
   numPages: number
 }
 
-interface HOCProps {
-  dataSource: string
-  page?: number
-  limit?: number
-}
-
-export const useDataFetching = ({
-  dataSource,
-  page = 1,
-  limit = 10
-}: HOCProps) => {
-  const baseUrl = `https://jsonplaceholder.typicode.com/${dataSource}`
+const List = ({
+  dataSource, 
+  headers,
+  getListContent,
+  layout = ListType.TABLE,
+  currentPage = 1,
+  numPages
+}: Props) => {
+  let listComponent
   const dispatch = useDispatch()
+  const limit = 10
+  const baseUrl = `https://jsonplaceholder.typicode.com/${dataSource}`
   const [items, setItems] = React.useState<any[]>([])
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState<any>(null)
@@ -67,31 +66,9 @@ export const useDataFetching = ({
 
   React.useEffect(() => {
     if (pageCount) {
-      fetchData(baseUrl + `?_page=${page}&_limit=${limit}`)
+      fetchData(baseUrl + `?_page=${currentPage}&_limit=${limit}`)
     }
-  }, [pageCount, page])
-
-  return {
-    items,
-    loading,
-    error
-  }
-}
-
-const List = ({
-  dataSource, 
-  headers,
-  getListContent,
-  layout = ListType.TABLE,
-  currentPage,
-  numPages
-}: Props) => {
-  let listComponent
-  const dispatch = useDispatch()
-  const { items, loading, error } = useDataFetching({
-    dataSource, 
-    page: currentPage,
-  })
+  }, [pageCount, currentPage])
 
   switch(layout) {
     default:
